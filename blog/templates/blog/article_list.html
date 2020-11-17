@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'contact' %}"> Contact view </a>
+    <ul>
+        {% for obj in object_list %}
+            <li><a href="{% url 'article-detail' obj.id obj.slug %}"> {{ obj.title }} </a> - written by <b>{{ obj.author }}</b> on  {{ obj.publication_datetime }} </li>
+            <br><br>
+        {% endfor %}
+    </ul>
+
+{% include "_pagination.html" %}
+
+{% endblock %}

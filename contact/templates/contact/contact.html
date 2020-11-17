@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'article-list' %}"> back to the article listview </a>
+<h1>Contact form</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send message">
+</form>
+
+{% endblock %}

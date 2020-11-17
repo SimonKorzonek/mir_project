@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'article-list' %}"> back to the article listview </a>
+    <h1>{{ object.title }}</h1>
+    <p>written by 
+
+    {% if object.author.get_full_name %}
+        <b>{{ object.author.get_full_name }}</b>
+    {% else %}
+        <b>{{ object.author }}</b>
+    {% endif %}
+
+    on {{ object.publication_datetime }}</p>
+
+    <p>{{ object.content }}</p>
+
+{% endblock %}
