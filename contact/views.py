@@ -16,9 +16,8 @@ class ContactView(FormView):
             form.cleaned_data.get('name'),
             form.cleaned_data.get('content'),
             form.cleaned_data.get('email'),
-            ['blambor@gmail.com'],
+            ['debug@mir.de'],
             reply_to=[form.cleaned_data.get('email')])
         email.send()
-
         form.save()
         return super(ContactView, self).form_valid(form)
