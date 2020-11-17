@@ -2,6 +2,7 @@ from django.views.generic.edit import FormView
 from .models import ContactRequest
 from .forms import ContactForm
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 class ContactView(FormView):
@@ -11,10 +12,13 @@ class ContactView(FormView):
     success_url = '/'
 
     def form_valid(self, form):
-        send_mail(
-            subject = form.cleaned_data.get('name'),
-            message = form.cleaned_data.get('content'),
-            from_email = form.cleaned_data.get('email'),
-            recipient_list = ['blambor@gmail.com'])
+        email = EmailMessage(
+            form.cleaned_data.get('name'),
+            form.cleaned_data.get('content'),
+            form.cleaned_data.get('email'),
+            ['blambor@gmail.com'],
+            reply_to=[form.cleaned_data.get('email')])
+        email.send()
+
         form.save()
         return super(ContactView, self).form_valid(form)
